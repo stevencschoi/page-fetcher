@@ -15,8 +15,7 @@ const fetcher = (url, filePath) => {
       if (err) {
         throw err;
       } else {
-        const bytes = getFilesizeInBytes(filePath);
-        console.log(`Downloaded and saved ${bytes} bytes to ${filePath}`);
+        console.log(`Downloaded and saved ${getFilesizeInBytes(filePath)} bytes to ${filePath}`);
       }
     });
   });
