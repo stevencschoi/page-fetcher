@@ -4,22 +4,19 @@ const url = process.argv[2];
 const filePath = process.argv[3];
 
 const getFilesizeInBytes = (filename) => {
-  const stats = fs.statSync(filename)
-  const fileSizeInBytes = stats["size"]
+  const stats = fs.statSync(filename);
+  const fileSizeInBytes = stats["size"];
   return fileSizeInBytes;
-}
+};
 
 const fetcher = (url, filePath) => {
   request(url, (error, response, body) => {
     fs.writeFile(filePath, body, (err) => {
-      if (err) {
-        throw err;
-      } else {
-        console.log(`Downloaded and saved ${getFilesizeInBytes(filePath)} bytes to ${filePath}`);
-      }
+      if (err) throw err;
+      console.log(`Downloaded and saved ${getFilesizeInBytes(filePath)} bytes to ${filePath}`);
     });
   });
-}
+};
 
 fetcher(url, filePath);
 
