@@ -25,7 +25,7 @@ const fetcher = (url, filePath) => {
         const size = stats.size;
         if (err) throw err;
         console.log(`Downloaded and saved ${size} bytes to ${filePath}`);
-      })
+      });
     });
   });
 };
