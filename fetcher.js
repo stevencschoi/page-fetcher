@@ -3,13 +3,20 @@ const fs = require('fs');
 const url = process.argv[2];
 const filePath = process.argv[3];
 
+const getFilesizeInBytes = (filename) => {
+  const stats = fs.statSync(filename)
+  const fileSizeInBytes = stats["size"]
+  return fileSizeInBytes;
+}
+
 const fetcher = (url, filePath) => {
-  request(url, (body) => {
+  request(url, (error, response, body) => {
     fs.writeFile(filePath, body, (err) => {
       if (err) {
         throw err;
       } else {
-        console.log(`Saved to ${filePath}`);
+        const bytes = getFilesizeInBytes(filePath);
+        console.log(`Downloaded and saved ${bytes} bytes to ${filePath}`);
       }
     });
   });
